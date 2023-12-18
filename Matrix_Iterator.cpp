@@ -19,6 +19,10 @@ public:
         for (int i = 0; i < r; ++i)
         {
             matrix[i] = new T[c];
+            for (int j = 0; j < c; ++j)
+            {
+                matrix[i][j] = rand() % 100;
+            }
         }
     }
 
@@ -197,18 +201,8 @@ public:
     }
 };
 
-void FillMatrix(Matrix<int>& matrix, int rows, int columns)
-{
-    for (int i = 0; i < rows; ++i)
-    {
-        for (int j = 0; j < columns; ++j)
-        {
-            matrix[i][j] = rand() % 100;
-        }
-    }
-}
-
-void PrintOut(Matrix<int>& matrix, int rows, int columns)
+template<typename T>
+void PrintOut(Matrix<T>& matrix, int rows, int columns)
 {
     for (int i = 0; i < rows; ++i)
     {
@@ -222,9 +216,10 @@ void PrintOut(Matrix<int>& matrix, int rows, int columns)
     std::cout << std::endl << std::endl;
 }
 
-void SortedOrder(Matrix<int>& matrix)
+template<typename T>
+void SortedOrder(Matrix<T>& matrix)
 {
-    for (Matrix<int>::SnailIterator it = matrix.begin(); it != matrix.end(); ++it)
+    for (auto it = matrix.begin(); it != matrix.end(); ++it)
     {
         std::cout << *it << "  ";
     }
@@ -242,7 +237,6 @@ int main()
 
     Matrix<int> matrix(rows, columns);
 
-    FillMatrix(matrix, rows, columns);
     PrintOut(matrix, rows, columns);
 
     std::sort(matrix.begin(), matrix.end());
