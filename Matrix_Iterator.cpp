@@ -222,24 +222,31 @@ void PrintOut(Matrix<int>& matrix, int rows, int columns)
     std::cout << std::endl << std::endl;
 }
 
+void SortedOrder(Matrix<int>& matrix)
+{
+    for (Matrix<int>::SnailIterator it = matrix.begin(); it != matrix.end(); ++it)
+    {
+        std::cout << *it << "  ";
+    }
+}
+
 int main()
 {
     int rows = 0;
     int columns = 0;
+
     std::cout << "Enter number of rows: ";
     std::cin >> rows;
     std::cout << "Enter number of columns: ";
     std::cin >> columns;
+
     Matrix<int> matrix(rows, columns);
+
     FillMatrix(matrix, rows, columns);
-    int j = 0;
     PrintOut(matrix, rows, columns);
+
     std::sort(matrix.begin(), matrix.end());
+
     PrintOut(matrix, rows, columns);
-    Matrix<int>::SnailIterator it = matrix.begin();
-    for (int i = 0; i < columns*rows; ++i)
-    {
-        std::cout << *it << "  ";
-        ++it;
-    }
+    SortedOrder(matrix);
 }
